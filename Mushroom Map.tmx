@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="128" tileheight="128" nextobjectid="48">
+ <tileset firstgid="1" name="tileset" tilewidth="128" tileheight="128">
+  <image source="tileset.png" width="768" height="384"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlMkKwCAMRNOVlgpd/v9jjRQhCE1iInjpwDt4eQyaGABgakRAVmiX4/dVZ0N2ZEFmo690BILGdyEPOZ/QZ15Sj7vowvWUfN58+XJPCtdL8llj8XF32LOf9LYan8Yh+aQZrPV5knwjMsC73x7y3xABsQoD9A==
+  </data>
+ </layer>
+ <objectgroup name="triggers">
+  <properties>
+   <property name="blockers" value="trlb"/>
+  </properties>
+  <object id="10" x="2432" y="128" width="128" height="2304">
+   <properties>
+    <property name="blockers" value="trlb"/>
+   </properties>
+  </object>
+  <object id="11" x="0" y="128" width="128" height="2304">
+   <properties>
+    <property name="blockers" value="trlb"/>
+   </properties>
+  </object>
+  <object id="12" x="2048" y="640" width="384" height="384">
+   <properties>
+    <property name="blockers" value="trlb"/>
+   </properties>
+  </object>
+  <object id="13" x="1664" y="768" width="384" height="256">
+   <properties>
+    <property name="blockers" value="trlb"/>
+   </properties>
+  </object>
+  <object id="14" x="128" y="0" width="2304" height="128">
+   <properties>
+    <property name="blockers" value="trlb"/>
+   </properties>
+  </object>
+  <object id="15" x="128" y="2432" width="2304" height="128">
+   <properties>
+    <property name="blockers" value="trlb"/>
+   </properties>
+  </object>
+  <object id="16" x="1152" y="896" width="256" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="19" x="384" y="1152" width="384" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="20" x="640" y="1408" width="768" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="21" x="1408" y="1152" width="256" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="22" x="1536" y="1664" width="256" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="23" x="1280" y="1920" width="256" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="24" x="896" y="2048" width="256" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="25" x="512" y="2176" width="384" height="128">
+   <properties>
+    <property name="blockers" value="t"/>
+   </properties>
+  </object>
+  <object id="30" x="666" y="2128" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="33" x="994" y="1999" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="34" x="1382" y="1873" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="35" x="1636" y="1615" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="36" x="1184" y="1359" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="37" x="980" y="1359" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="38" x="788" y="1361" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="39" x="536" y="1105" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="40" x="1504" y="1103" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="41" x="1248" y="851" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="42" x="1822" y="725" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="43" x="2212" y="597" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="44" x="1584" y="2387" width="60" height="45">
+   <properties>
+    <property name="goody" value=""/>
+   </properties>
+  </object>
+  <object id="45" x="256" y="2176" width="128" height="128">
+   <properties>
+    <property name="player" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
