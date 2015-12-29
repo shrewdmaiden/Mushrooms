@@ -1,6 +1,6 @@
 __author__ = 'gregory'
 
-#create the exe using cx freeze and don't forget to add the image and sound files to the build folder
+#create the exe using cx freeze
 
 import pygame
 import tmx
@@ -65,8 +65,24 @@ class Player(pygame.sprite.Sprite):
 
         game.tilemap.set_focus(new.x, new.y)
 
-class Game(object):
+class Menu(object):
     def main(self, screen):
+        clock = pygame.time.Clock()
+        while 1:
+            dt = clock.tick(30)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    return
+
+            screen.fill((255,255,255))
+            pygame.draw.rect(screen, (255,0,0),[50,100,500,500])
+            pygame.display.flip()
+
+class Game(object):
+    def gal(self, screen):
         clock = pygame.time.Clock()
 
         background = pygame.image.load('BG.png')
@@ -134,6 +150,4 @@ class Game(object):
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((1000, 750))
-    Game().main(screen)
-
-
+    Menu().main(screen)
