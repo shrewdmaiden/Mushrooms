@@ -66,11 +66,17 @@ class Player(pygame.sprite.Sprite):
         game.tilemap.set_focus(new.x, new.y)
 
 class Game(object):
+    def button(self,screen,color,x,y,w,h):
+        mouse = pygame.mouse.get_pos()
+        pygame.draw.rect(screen,color,(x,y,w,h))
+        if x+w > mouse[0] > x and y+h > mouse[1] > y:
+            return
+
     def main(self, screen):
         clock = pygame.time.Clock()
 
         background = pygame.image.load('BG.png')
-
+        intro = True
 
         self.tilemap = tmx.load("Mushroom Map.tmx", screen.get_size())
 
@@ -90,6 +96,22 @@ class Game(object):
         self.bounce = pygame.mixer.Sound('bounce.wav')
         background_music = 'bensound-jazzcomedy.mp3'
         pygame.mixer.music.load(background_music)
+
+
+        while intro:
+            dt = clock.tick(30)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    return
+
+            screen.fill((255,255,255))
+            self.button(screen,(0,255,0),200,400,100,50)
+            self.button(screen,(255,0,0),600,400,100,50)
+            pygame.display.flip()
+
         pygame.mixer.music.play(-1,0)
 
         while 1:
@@ -101,11 +123,12 @@ class Game(object):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     return
 
-
             self.tilemap.update(dt / 1000., self)
 
             screen.blit(background, (0, 0))
             self.tilemap.draw(screen)
+            self.button(screen,(0,255,0),200,400,100,50)
+            self.button(screen,(255,0,0),600,400,100,50)
             if not self.goodies:
                 break
             pygame.display.flip()
@@ -124,8 +147,8 @@ class Game(object):
                     return
 
 
-            self.tilemap.update(dt / 1000., self)
 
+            self.tilemap.update(dt / 1000., self)
             screen.blit(background, (0, 0))
             self.tilemap.draw(screen)
             screen.blit(winner, (0, 0))
