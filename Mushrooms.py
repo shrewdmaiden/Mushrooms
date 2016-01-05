@@ -66,17 +66,23 @@ class Player(pygame.sprite.Sprite):
         game.tilemap.set_focus(new.x, new.y)
 
 class Game(object):
-    def button(self,screen,color,x,y,w,h):
+    def button(self,screen,color,x,y,w,h,action=None):
         mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
         pygame.draw.rect(screen,color,(x,y,w,h))
         if x+w > mouse[0] > x and y+h > mouse[1] > y:
-            return
+            if click[0] == 1 and action != None:
+                if action == "play":
+                    self.intro = False
+                elif action == "quit":
+                    pygame.quit()
+                    quit()
 
     def main(self, screen):
         clock = pygame.time.Clock()
 
         background = pygame.image.load('BG.png')
-        intro = True
+        self.intro = True
 
         self.tilemap = tmx.load("Mushroom Map.tmx", screen.get_size())
 
@@ -96,9 +102,11 @@ class Game(object):
         self.bounce = pygame.mixer.Sound('bounce.wav')
         background_music = 'bensound-jazzcomedy.mp3'
         pygame.mixer.music.load(background_music)
+        pygame.display.set_caption("Mushrooms!")
+        pygame.display.set_icon(pygame.image.load('Mushroom.png'))
 
 
-        while intro:
+        while self.intro:
             dt = clock.tick(30)
 
             for event in pygame.event.get():
@@ -108,8 +116,8 @@ class Game(object):
                     return
 
             screen.fill((255,255,255))
-            self.button(screen,(0,255,0),200,400,100,50)
-            self.button(screen,(255,0,0),600,400,100,50)
+            self.button(screen,(0,255,0),200,400,100,50,"play")
+            self.button(screen,(255,0,0),600,400,100,50,"quit")
             pygame.display.flip()
 
         pygame.mixer.music.play(-1,0)
@@ -127,8 +135,6 @@ class Game(object):
 
             screen.blit(background, (0, 0))
             self.tilemap.draw(screen)
-            self.button(screen,(0,255,0),200,400,100,50)
-            self.button(screen,(255,0,0),600,400,100,50)
             if not self.goodies:
                 break
             pygame.display.flip()
