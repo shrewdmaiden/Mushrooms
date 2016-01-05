@@ -66,6 +66,10 @@ class Player(pygame.sprite.Sprite):
         game.tilemap.set_focus(new.x, new.y)
 
 class Game(object):
+    def text_objects(self,text,font):
+        textSurface = font.render(text, True, (121,75,55))
+        return textSurface, textSurface.get_rect()
+
     def button(self,screen,color,x,y,w,h,action=None):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -78,10 +82,30 @@ class Game(object):
                     pygame.quit()
                     quit()
 
+    def imagebutton(self,screen,imagename,buttontext,x,y,action=None):
+        button = pygame.image.load(imagename)
+        screen.blit(button,(x,y))
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        font = pygame.font.Font("C:/windows/fonts/CURLZ___.TTF",30)
+        textSurface, textRect = self.text_objects(buttontext,font)
+        textRect.center = (x+(button.get_rect().size[0]/2),y+(button.get_rect().size[1]/2))
+        screen.blit(textSurface,textRect)
+
+        if x + button.get_rect().size[0] > mouse[0] > x and y + button.get_rect().size[1] > mouse[1] > y:
+            if click[0] == 1 and action !=None:
+                if action == "play":
+                    self.intro = False
+                elif action == "quit":
+                    pygame.quit()
+                    quit()
+
+
     def main(self, screen):
         clock = pygame.time.Clock()
 
         background = pygame.image.load('BG.png')
+        title = pygame.image.load('title.png')
         self.intro = True
 
         self.tilemap = tmx.load("Mushroom Map.tmx", screen.get_size())
@@ -115,9 +139,12 @@ class Game(object):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     return
 
-            screen.fill((255,255,255))
-            self.button(screen,(0,255,0),200,400,100,50,"play")
-            self.button(screen,(255,0,0),600,400,100,50,"quit")
+            screen.blit(background,(0,0))
+            screen.blit(title,(100,50))
+            self.imagebutton(screen,"button.png","Play!",300,600,"play")
+            self.imagebutton(screen,"button.png","Quit",590,600,"quit")
+            #self.button(screen,(0,255,0),200,400,100,50,"play")
+            #self.button(screen,(255,0,0),600,400,100,50,"quit")
             pygame.display.flip()
 
         pygame.mixer.music.play(-1,0)
