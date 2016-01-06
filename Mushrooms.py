@@ -70,18 +70,6 @@ class Game(object):
         textSurface = font.render(text, True, (121,75,55))
         return textSurface, textSurface.get_rect()
 
-    def button(self,screen,color,x,y,w,h,action=None):
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-        pygame.draw.rect(screen,color,(x,y,w,h))
-        if x+w > mouse[0] > x and y+h > mouse[1] > y:
-            if click[0] == 1 and action != None:
-                if action == "play":
-                    self.intro = False
-                elif action == "quit":
-                    pygame.quit()
-                    quit()
-
     def imagebutton(self,screen,imagename,buttontext,x,y,action=None):
         button = pygame.image.load(imagename)
         screen.blit(button,(x,y))
@@ -95,20 +83,68 @@ class Game(object):
         if x + button.get_rect().size[0] > mouse[0] > x and y + button.get_rect().size[1] > mouse[1] > y:
             if click[0] == 1 and action !=None:
                 if action == "play":
-                    self.intro = False
+                    self.menu = False
+                    self.Level_Menu(screen)
                 elif action == "quit":
                     pygame.quit()
                     quit()
+                elif action == "level1":
+                    self.Level_1(screen)
 
 
-    def main(self, screen):
+    def mainmenu(self, screen):
         clock = pygame.time.Clock()
 
         background = pygame.image.load('BG.png')
         title = pygame.image.load('title.png')
-        self.intro = True
+        self.menu = True
 
+        pygame.display.set_caption("Mushrooms!")
+        pygame.display.set_icon(pygame.image.load('Mushroom.png'))
+
+
+        while self.menu:
+            dt = clock.tick(30)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    return
+
+            screen.blit(background,(0,0))
+            screen.blit(title,(100,50))
+            self.imagebutton(screen,"button.png","Play!",300,600,"play")
+            self.imagebutton(screen,"button.png","Quit",590,600,"quit")
+            pygame.display.flip()
+
+
+    def Level_Menu(self,screen):
+        clock = pygame.time.Clock()
+
+        background = pygame.image.load('BG.png')
+        title = pygame.image.load('title.png')
+
+
+        while 1:
+            dt = clock.tick(30)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    return
+
+            screen.blit(background,(0,0))
+            self.imagebutton(screen,"button.png","Level 1",450,250,"level1")
+            screen.blit(title,(100,50))
+            pygame.display.flip()
+
+
+    def Level_1(self,screen):
+        clock = pygame.time.Clock()
         self.tilemap = tmx.load("Mushroom Map.tmx", screen.get_size())
+        background = pygame.image.load('BG.png')
 
         self.sprites = tmx.SpriteLayer()
         start_cell = self.tilemap.layers['triggers'].find('player')[0]
@@ -128,24 +164,6 @@ class Game(object):
         pygame.mixer.music.load(background_music)
         pygame.display.set_caption("Mushrooms!")
         pygame.display.set_icon(pygame.image.load('Mushroom.png'))
-
-
-        while self.intro:
-            dt = clock.tick(30)
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    return
-
-            screen.blit(background,(0,0))
-            screen.blit(title,(100,50))
-            self.imagebutton(screen,"button.png","Play!",300,600,"play")
-            self.imagebutton(screen,"button.png","Quit",590,600,"quit")
-            #self.button(screen,(0,255,0),200,400,100,50,"play")
-            #self.button(screen,(255,0,0),600,400,100,50,"quit")
-            pygame.display.flip()
 
         pygame.mixer.music.play(-1,0)
 
@@ -187,9 +205,10 @@ class Game(object):
             screen.blit(winner, (0, 0))
             pygame.display.flip()
 
+
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((1000, 750))
-    Game().main(screen)
+    Game().mainmenu(screen)
 
 
